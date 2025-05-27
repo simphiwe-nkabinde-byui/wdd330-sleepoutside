@@ -1,13 +1,15 @@
 import { renderListWithTemplate } from "./utils.mjs";
 
 function productCardTemplate(product) {
-  // Calcular si hay descuento
+  // Check if the product has a discount
+  // by comparing FinalPrice and SuggestedRetailPrice
   const hasDiscount = product.FinalPrice < product.SuggestedRetailPrice;
   const discountPercentage = hasDiscount 
     ? Math.round(((product.SuggestedRetailPrice - product.FinalPrice) / product.SuggestedRetailPrice) * 100)
     : 0;
 
-  // Template del indicador de descuento
+  // this will show the discount badge and original price if there is a discount
+  // otherwise it will not show anything
   const discountIndicator = hasDiscount 
     ? `<div class="discount-indicator">
          <span class="discount-badge">-${discountPercentage}% OFF</span>
