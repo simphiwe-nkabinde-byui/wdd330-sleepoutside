@@ -39,3 +39,28 @@ export function renderListWithTemplate(
   const htmlStrings = list.map(templateFn);
   parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
 }
+
+export function loadHeaderFooter(
+  headerSelector = "#header",
+  footerSelector = "#footer",
+) {
+  const header = qs(headerSelector);
+  const footer = qs(footerSelector);
+
+  if (header) {
+    fetch("/header.html")
+      .then((response) => response.text())
+      .then((html) => {
+        header.innerHTML = html;
+      });
+  }
+
+  if (footer) {
+    fetch("/footer.html")
+      .then((response) => response.text())
+      .then((html) => {
+        footer.innerHTML = html;
+      });
+  }
+
+}
