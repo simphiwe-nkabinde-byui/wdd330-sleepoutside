@@ -98,3 +98,28 @@ export function removeAllAlerts() {
   const alerts = document.querySelectorAll(".alert");
   alerts.forEach((alert) => document.querySelector("main").removeChild(alert));
 }
+
+export function renderWithTemplate(template, parentElement, data, callback) {
+  parentElement.innerHTML = template;
+  if (callback) callback(data);
+}
+
+async function loadTemplate(path) {
+  const response = await fetch(path);
+  if (!response.ok) {
+    console.log(response);
+  }
+  const htmlString = await response.text();
+  return htmlString;
+}
+
+export async function loadHeaderFooter() {
+  const headerTemplate = await loadTemplate("/public/partials/header.html");
+  const footerTemplate = await loadTemplate("/public/partials/footer.html");
+
+  const header = document.querySelector("#main-header");
+  const footer = document.querySelector("#main-footer");
+
+  renderWithTemplate(headerTemplate, header)
+  renderWithTemplate(footerTemplate, footer)
+}

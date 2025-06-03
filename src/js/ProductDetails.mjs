@@ -76,7 +76,26 @@ export default class ProductDetails {
   }
 
   renderProductDetails() {
-    productDetailsTemplate(this.product);
+    const brandName = document.querySelector("h3");
+    brandName.textContent = this.product.Brand.Name;
+
+    const name = document.querySelector("h2.divider");
+    name.textContent = this.product.NameWithoutBrand;
+
+    const image = document.querySelector("img.divider");
+    image.src = this.product.Images.PrimaryLarge;
+    image.alt = this.product.NameWithoutBrand;
+
+    const price = document.querySelector("p.product-card__price");
+    price.textContent = `$${this.product.FinalPrice}`;
+
+    const color = document.querySelector("p.product__color");
+    color.textContent = this.product.Colors.map((item) => item.ColorName).join(
+      ",",
+    );
+
+    const description = document.querySelector("p.product__description");
+    description.innerHTML = this.product.DescriptionHtmlSimple;
   }
 }
 

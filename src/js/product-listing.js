@@ -1,12 +1,13 @@
-import { loadHeaderFooter, getParam } from "./utils.mjs";
-import ExternalServices from "./ExternalServices.mjs";
+import ProductData from "./ProductData.mjs";
 import ProductList from "./ProductList.mjs";
+import { getParam, loadHeaderFooter } from "./utils.mjs";
 
 loadHeaderFooter();
 
 const category = getParam("category");
-const dataSource = new ExternalServices();
-const element = document.querySelector(".product-list");
-const listing = new ProductList(category, dataSource, element);
+const dataSource = new ProductData();
+const listElement = document.querySelector(".product-list");
+const myList = new ProductList(category, dataSource, listElement);
+myList.init();
 
-listing.init();
+document.querySelector("#category-name").textContent = category;
