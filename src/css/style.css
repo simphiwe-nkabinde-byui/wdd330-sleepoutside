@@ -90,7 +90,7 @@ p {
   margin-top: -1.3em;
 }
 
-.logo--square>div {
+.logo--square > div {
   margin-top: -1.7em;
 }
 
@@ -272,7 +272,7 @@ footer {
   margin-top: 30px;
 }
 
-.category-links>a {
+.category-links > a {
   width: 100px;
   text-decoration: none;
   color: #06589b;
@@ -282,7 +282,7 @@ footer {
   text-align: center;
 }
 
-.category-links>a>h2 {
+.category-links > a > h2 {
   font-weight: 600;
   font-size: 1.1rem;
 }
