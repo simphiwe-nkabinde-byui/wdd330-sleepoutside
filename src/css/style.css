@@ -90,7 +90,7 @@ p {
   margin-top: -1.3em;
 }
 
-.logo--square > div {
+.logo--square>div {
   margin-top: -1.7em;
 }
 
@@ -154,6 +154,10 @@ button {
 .products {
   margin-top: 2rem;
   padding: 1rem;
+}
+
+#category-name {
+  text-transform: capitalize;
 }
 
 .product-list {
@@ -260,4 +264,25 @@ button {
 footer {
   font-size: var(--small-font);
   padding: 1em;
+}
+
+.category-links {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 30px;
+}
+
+.category-links>a {
+  width: 100px;
+  text-decoration: none;
+  color: #06589b;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.category-links>a>h2 {
+  font-weight: 600;
+  font-size: 1.1rem;
 }

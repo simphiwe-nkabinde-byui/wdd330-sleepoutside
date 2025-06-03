@@ -34,7 +34,7 @@ export default class ProductDetails {
     name.textContent = this.product.NameWithoutBrand;
 
     const image = document.querySelector("img.divider");
-    image.src = this.product.Image;
+    image.src = this.product.Images.PrimaryLarge;
     image.alt = this.product.NameWithoutBrand;
 
     const price = document.querySelector("p.product-card__price");
