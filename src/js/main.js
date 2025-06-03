@@ -2,11 +2,11 @@ import { loadHeaderFooter, getLocalStorage } from "./utils.mjs";
 
 loadHeaderFooter();
 
-
+// Agregar funcionalidad de búsqueda después de cargar el header
 setTimeout(() => {
   setupSearch();
-  updateCartCount(); 
-}, 500); 
+  updateCartCount(); // Actualizar contador del carrito en la página principal
+}, 500); // Aumentamos el tiempo para asegurar que el header esté cargado
 
 function setupSearch() {
   const searchForm = document.getElementById('search-form');
@@ -45,7 +45,7 @@ function updateCartCount() {
       cartCount.style.display = "flex";
     }
   } else {
-    
+    // Si no encuentra el elemento, intentar de nuevo después de un poco más de tiempo
     setTimeout(updateCartCount, 200);
   }
 }
