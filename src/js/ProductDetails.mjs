@@ -18,12 +18,61 @@ export default class ProductDetails {
     document
       .getElementById("add-to-cart")
       .addEventListener("click", this.addProductToCart.bind(this));
+    
+    // Update cart count on page load
+    this.updateCartCount();
   }
 
   addProductToCart() {
     const cartItems = getLocalStorage("so-cart") || [];
     cartItems.push(this.product);
     setLocalStorage("so-cart", cartItems);
+    
+    // Trigger cart animation
+    this.animateCartIcon();
+    
+    // Update cart count
+    this.updateCartCount();
+  }
+
+  animateCartIcon() {
+    const cartIcon = document.getElementById("cart-icon");
+    const cartCount = document.getElementById("cart-count");
+    
+    if (cartIcon && cartCount) {
+      // Remove animation classes if they exist
+      cartIcon.classList.remove("cart-bounce");
+      cartCount.classList.remove("cart-count-pulse");
+      
+      // Force reflow to restart animation
+      cartIcon.offsetHeight;
+      
+      // Add animation classes
+      cartIcon.classList.add("cart-bounce");
+      cartCount.classList.add("cart-count-pulse");
+      
+      // Remove animation classes after animation completes
+      setTimeout(() => {
+        cartIcon.classList.remove("cart-bounce");
+        cartCount.classList.remove("cart-count-pulse");
+      }, 600);
+    }
+  }
+
+  updateCartCount() {
+    const cartItems = getLocalStorage("so-cart") || [];
+    const cartCount = document.getElementById("cart-count");
+    
+    if (cartCount) {
+      cartCount.textContent = cartItems.length;
+      
+      // Hide count if cart is empty
+      if (cartItems.length === 0) {
+        cartCount.style.display = "none";
+      } else {
+        cartCount.style.display = "flex";
+      }
+    }
   }
 
   renderProductDetails() {
