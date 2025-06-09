@@ -33,9 +33,11 @@ export default class ShoppingCart {
     renderListWithTemplate(productCardTemplate, this.listElement, list);
   }
   renderTotal(list) {
+    const cartFooter = document.querySelector(".cart-footer");
     if (!list?.length) {
-      if (this.totalElement) this.totalElement.innerHTML = "";
-      return;
+      cartFooter.classList.add("hide");
+    } else {
+      cartFooter.classList.remove("hide");
     }
     const cartIemTotals = list.map((i) => i.FinalPrice * i.quantity);
     const grandTotal = cartIemTotals.reduce((acc, curr) => acc + curr, 0);
