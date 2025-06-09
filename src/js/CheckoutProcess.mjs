@@ -1,6 +1,7 @@
-import { getLocalStorage } from "./utils.mjs";
+import ExternalServices from "./ExternalServices.mjs";
+import { alertMessage, getLocalStorage, setLocalStorage } from "./utils.mjs";
 
-const baseURL = import.meta.env.VITE_SERVER_URL;
+const services = new ExternalServices();
 
 export default class CheckoutProcess {
   constructor(key, outputSelector) {
@@ -76,25 +77,15 @@ export default class CheckoutProcess {
       shipping: this.shipping,
       tax: this.tax,
     };
-    console.log({ payload });
 
-    const options = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    };
-
-    const response = await fetch(`${baseURL}checkout`, options);
-    if (!response.ok) {
-      console.log("error:", response);
+    try {
+      await services.checkout(payload);
+      setLocalStorage("so-cart", []);
+      window.location.href = "/checkout/success.html";
+    } catch (error) {
+      for (const key of Object.keys(error.message)) {
+        alertMessage(error.message[key]);
+      }
     }
-    const jsonResp = await response.json();
-    console.log({ jsonResp });
-
-    // get the form element data by the form name
-    // convert the form data to a JSON order object using the formDataToJSON function
-    // populate the JSON order object with the order Date, orderTotal, tax, shipping, and list of items
-    // call the checkout method in the ExternalServices module and send it the JSON order data.
   }
-  formDataToJSON() {}
 }
