@@ -18,16 +18,27 @@ function productCardTemplate(item) {
     </li>`;
 }
 export default class ShoppingCart {
-  constructor(cartItems, listElement) {
+  constructor(cartItems, listElement, totalElement) {
     this.cartItems = cartItems;
     this.listElement = listElement;
+    this.totalElement = totalElement;
   }
 
   async init() {
     this.renderList(this.cartItems);
+    this.renderTotal(this.cartItems);
   }
 
   renderList(list) {
     renderListWithTemplate(productCardTemplate, this.listElement, list);
+  }
+  renderTotal(list) {
+    if (!list?.length) {
+      if (this.totalElement) this.totalElement.innerHTML = "";
+      return;
+    }
+    const cartIemTotals = list.map((i) => i.FinalPrice * i.quantity);
+    const grandTotal = cartIemTotals.reduce((acc, curr) => acc + curr, 0);
+    this.totalElement.textContent = `Total: $${grandTotal.toFixed(2)}`;
   }
 }

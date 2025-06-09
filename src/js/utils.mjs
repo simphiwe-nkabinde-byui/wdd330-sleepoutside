@@ -28,8 +28,9 @@ export function renderListWithTemplate(
   parentElement,
   list,
   position = "afterbegin",
-  clear = false
+  clear = false,
 ) {
+  if (!list) return;
   const htmlStrings = list.map(templateFn);
   // if clear is true we need to clear out the contents of the parent.
   if (clear) {
@@ -98,6 +99,6 @@ export async function loadHeaderFooter() {
   const header = document.querySelector("#main-header");
   const footer = document.querySelector("#main-footer");
 
-  renderWithTemplate(headerTemplate, header)
-  renderWithTemplate(footerTemplate, footer)
+  renderWithTemplate(headerTemplate, header);
+  renderWithTemplate(footerTemplate, footer);
 }
